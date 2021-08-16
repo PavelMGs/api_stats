@@ -4,7 +4,7 @@ const sequelize = require('./database');
 const cors = require('cors');
 const {User, Statistic} = require('./Models');
 
-sequelize.sync().then(() => console.log('asd'));
+sequelize.sync().then(() => console.log('db is on'));
 
 const app = express();
 
@@ -47,18 +47,26 @@ app.get('/:page', async (req, res) => {
     }
 })
 
-app.get('/:id&from&to', async (req, res) => {
-    
+app.get('/user/:id/:from/:to', async (req, res) => {
+    const fromDate = await new Date(+req.params.from);
+    const toDate = await new Date(+req.params.to);
     try {
-        const user = User.findOne({
+        const user = await User.findOne({
             where: {
-                id: req.params.id
+                id: +req.params.id,
             }
         })
-        const stats = Statistic.findAll
+        const stats = await Statistic.findAll({
+            where: {
+                user_id: +req.params.id,
+                date: {
+                    [Op.between]: [fromDate, toDate]
+                }
+            }
+        })
+        res.status(200).json({user, stats})
     } catch (err) {
-        console.log('asdasda')
-        res.sendStatus(500).json(err);
+        res.sendStatus(500);
     }
 })
 

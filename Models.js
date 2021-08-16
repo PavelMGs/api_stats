@@ -48,7 +48,7 @@ Statistic.init({
         primaryKey: true
     },
     date: {
-        type: DataTypes.STRING
+        type: DataTypes.DATE
     },
     page_views: {
         type: DataTypes.NUMBER
