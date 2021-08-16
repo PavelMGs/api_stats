@@ -50,6 +50,7 @@ app.get('/:page', async (req, res) => {
 app.get('/user/:id/:from/:to', async (req, res) => {
     const fromDate = await new Date(+req.params.from);
     const toDate = await new Date(+req.params.to);
+    
     try {
         const user = await User.findOne({
             where: {

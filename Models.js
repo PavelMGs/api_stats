@@ -66,7 +66,6 @@ Statistic.init({
     if (!statistics_records.length) {
         Statistic.bulkCreate(stats, {
             fields: ["user_id", "date", "page_views", "clicks"],
-            ignoreDuplicates: ["user_id"]
         })
     }
 })()
