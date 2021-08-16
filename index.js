@@ -70,6 +70,8 @@ app.get('/user/:id/:from/:to', async (req, res) => {
     }
 })
 
-app.listen(8000, async () => {
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, async () => {
     console.log('app is running');
 })
