@@ -45,7 +45,6 @@ class Statistic extends Model { }
 Statistic.init({
     user_id: {
         type: DataTypes.NUMBER,
-        primaryKey: true
     },
     date: {
         type: DataTypes.DATE
@@ -66,6 +65,7 @@ Statistic.init({
     if (!statistics_records.length) {
         Statistic.bulkCreate(stats, {
             fields: ["user_id", "date", "page_views", "clicks"],
+            ignoreDuplicates: false
         })
     }
 })()
